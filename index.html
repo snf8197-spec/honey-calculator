@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حاسبة توقعات مبيعات العسل الذكية</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background: #f4f6f9; padding: 20px; }
+        .calculator-box { background: white; padding: 25px; border-radius: 12px; max-width: 450px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { color: #d4a373; text-align: center; }
+        label { font-weight: bold; color: #333; display: block; margin-top: 15px; }
+        select, input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { background: #d4a373; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; margin-top: 20px; font-size: 16px; cursor: pointer; }
+        button:hover { background: #bc6c25; }
+        .result { margin-top: 20px; padding: 15px; background: #fefae0; border: 1px solid #faedcd; border-radius: 6px; text-align: center; font-weight: bold; color: #6f1d1b; }
+    </style>
+</head>
+<body>
+
+<div class="calculator-box">
+    <h2>حاسبة أداء ومبيعات العسل</h2>
+
+    <label>اختر نوع العسل:</label>
+    <select id="honeyType">
+        <option value="1.5">عسل سدر ملكي (الطلب مرتفع)</option>
+        <option value="1.0">عسل طلح (طلب متوسط)</option>
+        <option value="1.2">عسل حبة البركة</option>
+    </select>
+
+    <label>أدخل ميزانية الإعلان اليومية (بالريال):</label>
+    <input type="number" id="adBudget" placeholder="مثال: 100">
+
+    <button onclick="calculateHoneySales()">احسب المبيعات المتوقعة</button>
+
+    <div class="result" id="outputResult">أدخل المعطيات أعلاه لمعرفة النتيجة</div>
+</div>
+
+<script>
+    function calculateHoneySales() {
+        let budget = document.getElementById("adBudget").value;
+        let honeyMultiplier = parseFloat(document.getElementById("honeyType").value);
+
+        if(budget === "" || budget <= 0) {
+            document.getElementById("outputResult").innerHTML = "الرجاء إدخال ميزانية إعلانية صحيحة!";
+            return;
+        }
+
+        let predictedJars = (parseFloat(budget) * 0.15) * honeyMultiplier;
+
+        document.getElementById("outputResult").innerHTML = 
+            "بناءً على ميزانيتك، يتوقع أن تبيع تقريباً: <br><span style='font-size: 20px; color: #b5838d;'>" + Math.round(predictedJars) + "</span> عبوة عسل";
+    }
+</script>
+
+</body>
+</html>
